@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import axios from "axios";
+import { useState } from "react";
+import { InputForm } from "./components/inputForm";
+import { Forecast } from "./components/forecast";
 
 function App() {
+  const [temperature, setTemperature] = useState("");
+
+  const handleSubmit = async (location) => {
+    console.log("hwlloooooooooooo");
+    try {
+      const response = await axios.get("http://localhost:5000/weather?address=" + location);
+      const forecast = await response.data;
+      setTemperature(forecast);
+      // return forecast;
+      console.log(forecast);
+    } catch (error) {
+      console.log(error, "there is error");
+    }
+  };
+
+  // const getWeather = () => {};
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      hello
+      <InputForm handleSubmit={handleSubmit} temperature={temperature} />
+      <Forecast />
     </div>
   );
 }
