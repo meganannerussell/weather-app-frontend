@@ -3,8 +3,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { InputForm } from "./components/inputForm";
 import icon from "./assets/icon.svg";
+import runtimeEnv from "@mars/heroku-js-runtime-env"
 // import { Forecast } from "./components/forecast";
 // import forecast from "../../server/utils/Forecast";
+
+const env = runtimeEnv()
+export const apiBaseUrl = env.REACT_APP_API_URL || "http://localhost:5000";
 
 function App() {
   const [temperature, setTemperature] = useState("");
@@ -19,7 +23,7 @@ function App() {
 
   const fetchWeather = async (location) => {
     const response = await axios.get(
-      "http://localhost:5000/weather?address=" + location
+      `${apiBaseUrl}/weather?address=` + location
     );
     const forecast = await response.data;
     // setIsLoading(true)
