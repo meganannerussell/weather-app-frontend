@@ -46,10 +46,10 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{padding:30}}>
+      <div style={{paddingTop:30}}>
         <img style={{ width: 200 }} alt="img" src={icon} />
       </div>
-
+    <h1 style={{paddingBottom:20}}>Current Weather Forecast</h1>
       <InputForm
         handleSubmit={handleSubmit}
         temperature={temperature}
