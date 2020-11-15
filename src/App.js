@@ -1,6 +1,6 @@
 import "./App.css";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { InputForm } from "./components/inputForm";
 import icon from "./assets/icon.svg";
 import runtimeEnv from "@mars/heroku-js-runtime-env"
@@ -14,19 +14,13 @@ function App() {
   const [temperature, setTemperature] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   (async (location) => {
-  //      await fetchWeather(location);
-  //     setIsLoading(false);
-  //   })();
-  // }, []);
-
   const fetchWeather = async (location) => {
+    setIsLoading(true)
     const response = await axios.get(
       `${apiBaseUrl}/weather?address=` + location
     );
     const forecast = await response.data;
-    // setIsLoading(true)
+    setIsLoading(false)
     return forecast;
   };
 
